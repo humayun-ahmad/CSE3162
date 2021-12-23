@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCurrentJsonData(lat: String, long: String) {
-        val API_KEY = "14eee2f4df984332b21f8a4ed835fd10"
+        val API_KEY = "331ce978da5d446d953f327f3f948f5f"
         val queue = Volley.newRequestQueue(this)
 
         val url =
@@ -165,6 +165,15 @@ class MainActivity : AppCompatActivity() {
         tempF.text =  "${tempCel * 1.8 + 32} °F"
         var hdt = response.getJSONArray("data").getJSONObject(0).getString("rh")
         humidity.text =  hdt + "%"
+        pres.text = response.getJSONArray("data").getJSONObject(0).getString("pres") + "mBar"
+        vis.text = response.getJSONArray("data").getJSONObject(0).getString("vis") + "km"
+        var weatherStatus = response.getJSONArray("data").getJSONObject(0).getJSONObject("weather").getString("description")
+        weather.text = weatherStatus
+
+        ob_time.text = response.getJSONArray("data").getJSONObject(0).getString("datetime")
+
+        sunrise.text = response.getJSONArray("data").getJSONObject(0).getString("sunrise")
+        sunset.text = response.getJSONArray("data").getJSONObject(0).getString("sunset")
     }
 
 }
